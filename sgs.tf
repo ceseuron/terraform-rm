@@ -45,3 +45,18 @@ resource "aws_security_group" "all_worker_mgmt" {
     ]
   }
 }
+
+resource "aws_security_group" "rds_security_group" {
+  name_prefix = "all_worker_management"
+  vpc_id      = module.vpc.vpc_id
+
+  ingress {
+    from_port = 3306
+    to_port   = 3306
+    protocol  = "tcp"
+
+    cidr_blocks = [
+      "10.128.1.0/24"
+    ]
+  }
+}

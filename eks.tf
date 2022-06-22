@@ -40,3 +40,7 @@ data "aws_eks_cluster" "cluster" {
 data "aws_eks_cluster_auth" "cluster" {
   name = module.rm_eks_cluster.cluster_id
 }
+
+data "aws_eks_cluster_auth" "aws_iam_authenticator" {
+  name = module.rm_eks_cluster.cluster_id
+}

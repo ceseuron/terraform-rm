@@ -7,6 +7,7 @@ provider "kubernetes" {
 provider "helm" {
   kubernetes {
     host                   = data.aws_eks_cluster.cluster.endpoint
+    token                  = data.aws_eks_cluster_auth.aws_iam_authenticator.token
     cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
   }
 }
@@ -47,4 +48,6 @@ module "load_balancer_controller" {
   cluster_identity_oidc_issuer     = module.rm_eks_cluster.cluster_oidc_issuer_url
   cluster_identity_oidc_issuer_arn = module.rm_eks_cluster.oidc_provider_arn
   cluster_name                     = module.rm_eks_cluster.cluster_id
+
+  helm_chart_version = "1.4.2"
 }
